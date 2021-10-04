@@ -68,6 +68,7 @@ if search_file.search_file(file_names[0], 'data') == False or search_file.search
         if search_file.search_file(zipfile_name, downloads_path) == False:
             print('Zipfile is not present in downloads folder')
             print('Please download the zip file with name ' + zipfile_name + ' from NSE website')
+            exit(0)
         else:
             extract_files.extract(zipname = zipfile_name, file_names = file_names, copy_from_downloads = True)
             print('Copied zipfile from downloads/ to archives/ and extracted the csv files from archives/ folder to data/ folder')
@@ -126,5 +127,5 @@ print('Here are the action points suggested by 4 stroke algorithm, which is expe
 print('-------------------------------------------------------------------------------------------------------')
 print('1. If {ce_strike} CE opens > {ce_high}, buy {ce_strike} CE.\ntarget = 5% and stop loss = 2.5%. Book profit or loss after 5 min!\nNo keeping overnight!\n'.format(ce_strike = itm_ce, ce_high = float(hl_ce['HI_PRICE   '])))
 print('2. If {ce_strike} CE opens < {ce_low}, short {ce_strike} CE.\ntarget = 5% and stop loss = 2.5%. Book profit or loss after 5 min!\nNo keeping overnight!\n'.format(ce_strike = itm_ce, ce_low = float(hl_ce['LO_PRICE   '])))
-print('3. If {pe_strike} PE opens > {pe_high}, buy {pe_strike} PE.\ntarget = 5% and stop loss = 2.5%. Book profit or loss after 5 min!\nNo keeping overnight!\n'.format(pe_strike = itm_pe, pe_high = float(hl_ce['HI_PRICE   '])))
-print('4. If {pe_strike} PE opens < {pe_low}, short {pe_strike} PE.\ntarget = 5% and stop loss = 2.5%. Book profit or loss after 5 min!\nNo keeping overnight!\n'.format(pe_strike = itm_pe, pe_low = float(hl_ce['LO_PRICE   '])))
+print('3. If {pe_strike} PE opens > {pe_high}, buy {pe_strike} PE.\ntarget = 5% and stop loss = 2.5%. Book profit or loss after 5 min!\nNo keeping overnight!\n'.format(pe_strike = itm_pe, pe_high = float(hl_pe['HI_PRICE   '])))
+print('4. If {pe_strike} PE opens < {pe_low}, short {pe_strike} PE.\ntarget = 5% and stop loss = 2.5%. Book profit or loss after 5 min!\nNo keeping overnight!\n'.format(pe_strike = itm_pe, pe_low = float(hl_pe['LO_PRICE   '])))
