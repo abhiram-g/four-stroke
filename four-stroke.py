@@ -50,8 +50,16 @@ while True:
     else:
         print('Please re-enter the end date in dd-mm-yyyy format!')
 
-
-
+while True:
+    exp_date_str = input('Please enter the expiry date of the option chain. Else, hit enter to choose upcoming one as expiry date (empty input): ')
+    exp_date_str = exp_date_str.strip()
+    if exp_date_str == '':
+        break
+    elif re.match('^\d{2}-\d{2}-\d{4}$', exp_date_str):
+        exp_date_str = exp_date_str.replace('-', '/')
+        break
+    else:
+        print('Please re-enter the end date in dd-mm-yyyy format!')
 # Chock if the file is present in data, archive, or downloads, and import if needed
 file_names = ['op'+prev_date_str+'.csv', 'fo'+prev_date_str+'.csv']
 print('Searching for the csv in data/ folder...')
@@ -106,12 +114,16 @@ itm_pe = itm_ce + step_size
 # Read highs and lows of the ITM CE and PE
 index_name = 'NIFTY     ' if index_type == '1' else 'BANKNIFTY '
 constraints = {'SYMBOL    ': index_name, 'STR_PRICE  ': '000'+str(itm_ce)+'0', 'OPT_TYPE': 'CE      '}
+if exp_date_str != '':
+    constraints['EXP_DATE  '] = exp_date_str
 fields = ['HI_PRICE   ', 'LO_PRICE   ', 'EXP_DATE  ']
 hl_ce = read_csv.read_index_data(filename = 'data/'+file_names[0], constraints = constraints, fields = fields)
 hl_ce = hl_ce[0]
 
 
 constraints = {'SYMBOL    ': index_name, 'STR_PRICE  ': '000'+str(itm_pe)+'0', 'OPT_TYPE': 'PE      '}
+if exp_date_str != '':
+    constraints['EXP_DATE  '] = exp_date_str
 fields = ['HI_PRICE   ', 'LO_PRICE   ', 'EXP_DATE  ']
 hl_pe = read_csv.read_index_data(filename = 'data/'+file_names[0], constraints = constraints, fields = fields)
 hl_pe = hl_pe[0]
